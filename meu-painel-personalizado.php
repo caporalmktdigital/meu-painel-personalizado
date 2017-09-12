@@ -3,13 +3,35 @@
 /*
 
 Plugin Name: Meu Painel Personalizado
-Plugin URL: https://caporalmktdigital.com.br/
+Plugin URL: https://caporalmktdigital.com.br/plataformas/plugin-meu-painel-personalizado/
 Description: A plugin to modify the dashboard welcome message to your custom page.
 Version: 1.0
-Author: Caporal Mkt Digital by Alexandre Caporal
+Author: Alexandre Caporal
 Author URI: https://caporalmktdigital.com.br/
 
 */
+
+add_action( 'init', 'github_plugin_updater' );
+function github_plugin_updater() {
+	include_once 'updater.php';
+	define( 'WP_GITHUB_FORCE_UPDATE', true );
+if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
+	$config = array(
+		'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+		'proper_folder_name' => 'plugin-name', // this is the name of the folder your plugin lives in
+		'api_url' => 'https://api.github.com/repos/caporalmktdigital/meu-painel-personalizado', // the GitHub API url of your GitHub repo
+		'raw_url' => 'https://raw.github.com/caporalmktdigital/meu-painel-personalizado/master', // the GitHub raw url of your GitHub repo
+		'github_url' => 'https://github.com/caporalmktdigital/meu-painel-personalizado', // the GitHub url of your GitHub repo
+		'zip_url' => 'https://github.com/caporalmktdigital/meu-painel-personalizado/zipball/master', // the zip url of the GitHub repo
+		'sslverify' => true, // whether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
+		'requires' => '3.8', // which version of WordPress does your plugin require?
+		'tested' => '4.8.1', // which version of WordPress is your plugin tested up to?
+		'readme' => 'README.md', // which file to use as the readme for the version number
+		'access_token' => '', // Access private repositories by authorizing under Appearance > GitHub Updates when this example plugin is installed
+	);
+	new WP_GitHub_Updater($config);
+}
+}
 
 function meu_painel_personalizado() {
 
