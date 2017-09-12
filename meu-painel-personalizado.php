@@ -5,7 +5,7 @@
 Plugin Name: Meu Painel Personalizado
 Plugin URL: https://caporalmktdigital.com.br/plataformas/plugin-meu-painel-personalizado/
 Description: A plugin to modify the dashboard welcome message to your custom page.
-Version: 1.0
+Version: 1.1
 Author: Alexandre Caporal
 Author URI: https://caporalmktdigital.com.br/
 
@@ -96,11 +96,19 @@ function remove_dashboard_widgets() {
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
-    unset($wp_meta_boxes['dashboard']['normal']['core']['rg_forms_dashboard']);
-    unset($wp_meta_boxes['dashboard']['normal']['core']['wpseo-dashboard-overview']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['bbp-dashboard-right-now']);
 }
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
+
+add_action('wp_dashboard_setup', 'remove_rg_forms_dashboard' );
+function remove_rg_forms_dashboard() {
+  remove_meta_box( 'rg_forms_dashboard', 'dashboard', 'normal' );
+}
+
+add_action('wp_dashboard_setup', 'remove_wpseo_dashboard_overview' );
+function remove_wpseo_dashboard_overview() {
+  remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' );
+}
 
 add_action( 'admin_bar_menu', 'remove_wp_logo', 999 );
 function remove_wp_logo( $wp_admin_bar ) {
