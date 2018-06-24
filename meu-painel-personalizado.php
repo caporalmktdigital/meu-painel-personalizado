@@ -5,7 +5,7 @@
 Plugin Name: Meu Painel Personalizado
 Plugin URL: https://caporalmktdigital.com.br/plataformas/plugin-meu-painel-personalizado/
 Description: A plugin to modify the dashboard welcome message to your custom page.
-Version: 1.2
+Version: 1.5
 Author: Alexandre Caporal
 Author URI: https://caporalmktdigital.com.br/
 
@@ -58,14 +58,12 @@ jQuery(document).ready( function($)
 
 add_action( 'welcome_panel', 'meu_painel_personalizado' );
 
-function meu_painel_personalizado_admin($bool) {
-if ( is_page( 'meu-painel-personalizado' ) ) :
-return false;
-else :
-return $bool;
-endif;
+function meu_painel_personalizado_admin() {
+if( is_page( 'meu-painel-personalizado' ) ):
+show_admin_bar(false);
+   endif;
 }
-add_filter('show_admin_bar', 'meu_painel_personalizado_hide_admin');
+add_action('wp_head', 'meu_painel_personalizado_admin');
 
 add_action('wp_trash_post', 'restrict_post_deletion', 10, 1);
 add_action('before_delete_post', 'restrict_post_deletion', 10, 1);
