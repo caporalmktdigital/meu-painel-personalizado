@@ -6,11 +6,11 @@ Tags: wordpress dashboard, custom dashboard, admin panel, painel wordpress
 
 Requires at least: 4.7
 
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 
-Stable tag: 1.5
+Stable tag: 1.6
 
-Current version: 1.5
+Current version: 1.6
 
 License: GPLv2
 
